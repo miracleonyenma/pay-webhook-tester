@@ -1,10 +1,13 @@
 const POST = async (req: Request) => {
   try {
-    const { url, payload } = await req.json();
+    const { url, verificationToken, payload } = await req.json();
 
     const response = await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "verification-token": verificationToken,
+      },
       body: JSON.stringify(payload),
     });
     const data = await response.json();
